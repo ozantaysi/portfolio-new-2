@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ozz's Portfolio | Modern One Page</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(22, 31, 48, 0.7);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            
+            /* Turuncu Vurgu Renkleri */
+            --accent-color: #f97316; 
+            --accent-glow: rgba(249, 115, 22, 0.4);
+            
+            --skills-card-bg: rgba(249, 115, 22, 0.08);
+            --skills-card-glow: rgba(249, 115, 22, 0.25);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        html {
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            height: 100%;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(249, 115, 22, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(99, 102, 241, 0.12) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        /* Üst Menü Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            z-index: 1000;
+            backdrop-filter: blur(12px);
+            background: rgba(11, 15, 25, 0.6);
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-color);
+            letter-spacing: -0.5px;
+            cursor: pointer;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--accent-color);
+        }
+
+        /* Yan Taraf Nokta Navigasyonu (Slider Dots) */
+        .slider-dots {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            z-index: 1000;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: block;
+        }
+
+        .dot:hover, .dot.active {
+            background: var(--accent-color);
+            transform: scale(1.2);
+        }
+
+        /* Tam Ekran Bölümler (Sections) */
+        .section {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0 10%;
+            position: relative;
+        }
+
+        /* Hero Bölümü - BÜYÜK BAŞLIK GÜNCELLEMESİ */
+        .hero h1 {
+            font-size: 4.5rem; /* Puntolar büyütüldü */
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            text-align: center;
+            letter-spacing: -1.5px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 650px;
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent-color);
+            color: #fff;
+            padding: 0.9rem 2.2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 0 20px var(--accent-glow);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(249, 115, 22, 0.6);
+        }
+
+        /* İçerik Başlıkları */
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            position: relative;
+        }
+
+        /* Glassmorphism Kartlar */
+        .glass-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(16px);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Hakkımda Kutusu */
+        .about-box {
+            max-width: 800px;
+            text-align: center;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        /* Beceriler Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .skill-card {
+            background: var(--skills-card-bg);
+            border: 1px solid var(--accent-color);
+            padding: 2rem 1.5rem;
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px var(--skills-card-glow);
+        }
+
+        .skill-card:hover {
+            border-color: #fff;
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 35px var(--skills-card-glow);
+        }
+
+        .skill-card i {
+            font-size: 2.8rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .skill-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: #fff; 
+        }
+
+        .skill-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* İletişim Kutusu */
+        .contact-box {
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .contact-box p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            position: absolute;
+            bottom: 2.5rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Sayfa Altındaki Turuncu Bant */
+        .orange-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, #f97316, #fb923c, #f97316);
+            box-shadow: 0 -2px 10px rgba(249, 115, 22, 0.5);
+        }
+
+        /* Mobil Uyum */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; } /* Mobil ekranlar için büyüklük ayarı */
+            .hero p { font-size: 1rem; }
+            .slider-dots { display: none; }
+            nav { display: none; }
+            .section { padding: 0 1.5rem; }
+            .skills-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo" onclick="scrollToSection('home')">Ozz<span>.</span></div>
+        <nav>
+            <a onclick="scrollToSection('home')" class="nav-link active" data-target="home">Ana Sayfa</a>
+            <a onclick="scrollToSection('about')" class="nav-link" data-target="about">Hakkımda</a>
+            <a onclick="scrollToSection('skills')" class="nav-link" data-target="skills">Yetenekler</a>
+            <a onclick="scrollToSection('contact')" class="nav-link" data-target="contact">İletişim</a>
+        </nav>
+    </header>
+
+    <!-- Yan Taraf Slider Noktaları -->
+    <div class="slider-dots">
+        <span onclick="scrollToSection('home')" class="dot active" data-target="home" title="Ana Sayfa"></span>
+        <span onclick="scrollToSection('about')" class="dot" data-target="about" title="Hakkımda"></span>
+        <span onclick="scrollToSection('skills')" class="dot" data-target="skills" title="Yetenekler"></span>
+        <span onclick="scrollToSection('contact')" class="dot" data-target="contact" title="İletişim"></span>
+    </div>
+
+    <!-- Section 1: Hero (İstediğiniz Büyük Başlık Eklendi) -->
+    <section id="home" class="section hero">
+        <h1><span>Ozz's Portfolio</span></h1>
+        <p>Modern arayüzler, yüksek performanslı web çözümleri ve kullanıcı odaklı dijital deneyimler geliştiriyorum.</p>
+        <a onclick="scrollToSection('contact')" class="btn">İletişime Geç <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></a>
+    </section>
+
+    <!-- Section 2: Hakkımda -->
+    <section id="about" class="section">
+        <h2 class="section-title">Hakkımda</h2>
+        <div class="glass-card about-box">
+            <p>
+                Teknoloji ve yazılım dünyasına tutkuyla bağlı bir geliştiriciyim. Web mimarileri, modern ön yüz (front-end) geliştirmeleri ve dijital sistemlerin optimizasyonu üzerine projeler üretiyorum. Temiz kod prensipleri ve estetik tasarımlarla fikirleri dijital ürünlere dönüştürmekten keyif alıyorum.
+            </p>
+        </div>
+    </section>
+
+    <!-- Section 3: Yetenekler -->
+    <section id="skills" class="section">
+        <h2 class="section-title">Yetenekler &
