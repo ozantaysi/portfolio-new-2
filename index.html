@@ -191,12 +191,39 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
 
-        /* Hakkımda Kutusu */
+        /* --- FOTOĞRAF VE HAKKIMDA DÜZENİ --- */
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .profile-img-wrapper {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .profile-img {
+            width: 210px;
+            height: 210px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent-color);
+            box-shadow: 0 0 25px var(--accent-glow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 35px rgba(249, 115, 22, 0.6);
+        }
+
         .about-box {
-            max-width: 800px;
-            text-align: center;
+            text-align: left;
             line-height: 1.8;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: var(--text-muted);
         }
 
@@ -279,6 +306,8 @@
             .slider-dots { display: none; }
             nav { display: none; }
             .section { padding: 0 1.5rem; }
+            .about-container { flex-direction: column; text-align: center; gap: 1.5rem; }
+            .about-box { text-align: center; }
             .skills-grid { grid-template-columns: 1fr 1fr; }
         }
     </style>
@@ -311,13 +340,18 @@
         <a onclick="scrollToSection('contact')" class="btn">İletişime Geç <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></a>
     </section>
 
-    <!-- Section 2: Hakkımda -->
+    <!-- Section 2: Hakkımda (Fotoğraflı Düzen) -->
     <section id="about" class="section">
         <h2 class="section-title">Hakkımda</h2>
-        <div class="glass-card about-box">
-            <p>
-                Teknoloji ve yazılım dünyasına tutkuyla bağlı bir geliştiriciyim. Web mimarileri, modern ön yüz (front-end) geliştirmeleri ve dijital sistemlerin optimizasyonu üzerine projeler üretiyorum. Temiz kod prensipleri ve estetik tasarımlarla fikirleri dijital ürünlere dönüştürmekten keyif alıyorum.
-            </p>
+        <div class="about-container">
+            <div class="profile-img-wrapper">
+                <img src="profile.jpg" alt="Ozan" class="profile-img">
+            </div>
+            <div class="glass-card about-box">
+                <p>
+                    Teknoloji ve yazılım dünyasına tutkuyla bağlı bir geliştiriciyim. Web mimarileri, modern ön yüz (front-end) geliştirmeleri ve dijital sistemlerin optimizasyonu üzerine projeler üretiyorum. Temiz kod prensipleri ve estetik tasarımlarla fikirleri dijital ürünlere dönüştürmekten keyif alıyorum.
+                </p>
+            </div>
         </div>
     </section>
 
@@ -358,7 +392,6 @@
         <footer>
             <p>&copy; 2026 Ozz's Portfolio. Tüm hakları saklıdır.</p>
         </footer>
-        <!-- En Alt Turuncu Çizgi -->
         <div class="orange-bar"></div>
     </section>
 
@@ -374,7 +407,6 @@
             }
         }
 
-        // Sayfa kaydırıldıkça menü ve noktaların aktifleşmesi
         const sections = document.querySelectorAll('.section');
         const navLinks = document.querySelectorAll('.nav-link');
         const dots = document.querySelectorAll('.dot');
